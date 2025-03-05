@@ -1,0 +1,91 @@
+{
+  "products": {
+    "products": "Продукция",
+    "product": "Продукт",
+    "search_placeholder": "Поиск продукции...",
+    "export": "Экспорт",
+    "add_product": "Добавить продукт",
+    "filter_title": "Фильтр продукта",
+    "category_label": "Категория"
+  },
+  "sidebar": {
+    "title": "Вента Админ",
+    "dashboard": "Панель",
+    "inquiries": "Запросы",
+    "videos": "Тренинги",
+    "ad": "Вскоре"
+  },
+  "inquiries": {
+    "inquiries": "Запросы",
+    "inquiry": "Запрос",
+    "search_placeholder": "Поиск запросов...",
+    "export": "Экспорт",
+    "add_inquiry": "Добавить запрос",
+    "filter_title": "Фильтровать запросы",
+    "category_label": "Категория",
+    "status": {
+      "label": "Статус",
+      "all": "Все статусы",
+      "new": "Новый",
+      "in_progress": "В обработке",
+      "resolved": "Решен",
+      "unresolved": "Не решен"
+    },
+    "priority": {
+      "label": "Приоритет",
+      "all": "Все приоритеты",
+      "low": "Низкий",
+      "medium": "Средний",
+      "high": "Высокий"
+    },
+    "buttons": {
+      "apply_filters": "Применить фильтры",
+      "reset_filters": "Сбросить фильтры",
+      "view": "Просмотр",
+      "edit": "Редактировать",
+      "save": "Сохранить",
+      "cancel": "Отмена",
+      "close": "Закрыть"
+    },
+    "modal": {
+      "view_title": "Детали запроса",
+      "edit_title": "Редактировать запрос",
+      "name": "Имя",
+      "email": "Email",
+      "phone": "Телефон",
+      "message": "Сообщение",
+      "date": "Дата отправки",
+      "notes": "Примечания",
+      "notes_placeholder": "Введите ваши примечания"
+    },
+    "table": {
+      "name": "Имя",
+      "email": "Email",
+      "phone": "Телефон",
+      "message": "Сообщение",
+      "date": "Дата",
+      "status": "Статус",
+      "priority": "Приоритет",
+      "actions": "Действия"
+    }
+  },
+  "login": {
+    "title": "Вента Админ",
+    "heading": "Войдите в свой аккаунт",
+    "email": {
+      "label": "Электронная почта",
+      "placeholder": "Введите вашу почту"
+    },
+    "password": {
+      "label": "Пароль",
+      "placeholder": "Введите ваш пароль"
+    },
+    "submit": "Войти",
+    "success": "Вход выполнен !",
+    "error": "Электронная почта или пароль неверны !",
+    "email_required": "Электронная почта обязательна",
+    "email_invalid": "Электронная почта недействительна",
+    "password_required": "Пароль обязателен",
+    "password_invalid": "Пароль должен содержать не менее 6 символов"
+  }
+}

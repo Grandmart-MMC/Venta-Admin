@@ -1,0 +1,91 @@
+{
+    "products": {
+      "products": "Products",
+      "product": "Product",
+      "search_placeholder": "Search products...",
+      "export": "Export",
+      "add_product": "Add Product",
+      "filter_title": "Filter Product",
+      "category_label": "Category"
+    },
+    "sidebar": {
+      "title": "Venta Admin",
+      "dashboard": "Dashboard",
+      "inquiries": "Inquiries",
+      "videos": "Trainings",
+      "ad": "Coming Soon"
+  },
+  "inquiries": {
+    "inquiries": "Inquiries",
+    "inquiry": "Inquiry",
+    "search_placeholder": "Search inquiries...",
+    "export": "Export",
+    "add_inquiry": "Add Inquiry",
+    "filter_title": "Filter Inquiries",
+    "category_label": "Category",
+    "status": {
+      "label": "Status",
+      "all": "All Statuses",
+      "new": "New",
+      "in_progress": "In Progress",
+      "resolved": "Resolved",
+      "unresolved": "Unresolved"
+    },
+    "priority": {
+      "label": "Priority",
+      "all": "All Priorities",
+      "low": "Low",
+      "medium": "Medium",
+      "high": "High"
+    },
+    "buttons": {
+      "apply_filters": "Apply Filters",
+      "reset_filters": "Reset Filters",
+      "view": "View",
+      "edit": "Edit",
+      "save": "Save",
+      "cancel": "Cancel",
+      "close": "Close"
+    },
+    "modal": {
+      "view_title": "Inquiry Details",
+      "edit_title": "Edit Inquiry",
+      "name": "Name",
+      "email": "Email",
+      "phone": "Phone",
+      "message": "Message",
+      "date": "Submission Date",
+      "notes": "Notes",
+      "notes_placeholder": "Enter your notes"
+    },
+    "table": {
+      "name": "Name",
+      "email": "Email",
+      "phone": "Phone",
+      "message": "Message",
+      "date": "Date",
+      "status": "Status",
+      "priority": "Priority",
+      "actions": "Actions"
+    }
+  },
+    "login": {
+    "title": "Venta Admin",
+    "heading": "Sign in to your account",
+    "email": {
+      "label": "Email",
+      "placeholder": "Enter your email"
+    },
+    "password": {
+      "label": "Password",
+      "placeholder": "Enter your password"
+    },
+    "submit": "Sign In",
+    "success": "Signed in !",
+    "error": "Email or password is incorrect !",
+    "email_required": "Email is required",
+    "email_invalid": "Email is invalid",
+    "password_required": "Password is required",
+    "password_invalid": "Password must be at least 6 characters"
+  }
+  }

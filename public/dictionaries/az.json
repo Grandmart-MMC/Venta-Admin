@@ -1,0 +1,91 @@
+{
+  "products": {
+    "products": "Məhsullar",
+    "product": "Məhsul",
+    "search_placeholder": "Məhsulları axtar...",
+    "export": "İxrac",
+    "add_product": "Məhsul əlavə et",
+    "filter_title": "Məhsulu filtrlə",
+    "category_label": "Kateqoriya"
+  },
+  "sidebar": {
+    "title": "Venta Admin",
+    "dashboard": "Panel",
+    "inquiries": "Müraciətlər",
+    "videos": "Təlimlər",
+    "ad": "Tezliklə"
+  },
+  "inquiries": {
+    "inquiries": "Müraciətlər",
+    "inquiry": "Müraciət",
+    "search_placeholder": "Müraciətləri axtar...",
+    "export": "İxrac",
+    "add_inquiry": "Müraciət əlavə et",
+    "filter_title": "Müraciəti filtrlə",
+    "category_label": "Kateqoriya",
+    "status": {
+      "label": "Status",
+      "all": "Bütün statuslar",
+      "new": "Yeni",
+      "in_progress": "İşlənir",
+      "resolved": "Həll edilib",
+      "unresolved": "Həll edilməyib"
+    },
+    "priority": {
+      "label": "Prioritet",
+      "all": "Bütün prioritetlər",
+      "low": "Aşağı",
+      "medium": "Orta",
+      "high": "Yüksək"
+    },
+    "buttons": {
+      "apply_filters": "Filtrləri tətbiq et",
+      "reset_filters": "Filtrləri sıfırla",
+      "view": "Bax",
+      "edit": "Düzəliş et",
+      "save": "Yadda saxla",
+      "cancel": "Ləğv et",
+      "close": "Bağla"
+    },
+    "modal": {
+      "view_title": "Müraciət Detalları",
+      "edit_title": "Müraciəti Redaktə edin",
+      "name": "Ad",
+      "email": "Email",
+      "phone": "Telefon",
+      "message": "Mesaj",
+      "date": "Göndərilmə tarixi",
+      "notes": "Qeyd",
+      "notes_placeholder": "Qeydlərinizi daxil edin"
+    },
+    "table": {
+      "name": "Ad",
+      "email": "Email",
+      "phone": "Telefon",
+      "message": "Mesaj",
+      "date": "Tarix",
+      "status": "Status",
+      "priority": "Prioritet",
+      "actions": "Əməliyyatlar"
+    }
+  },
+  "login": {
+    "title": "Venta Admin",
+    "heading": "Hesabınıza daxil olun",
+    "email": {
+      "label": "Email",
+      "placeholder": "Mailinizi daxil edin"
+    },
+    "password": {
+      "label": "Şifrə",
+      "placeholder": "Şifrənizi daxil edin"
+    },
+    "submit": "Daxil ol",
+    "success": "Daxil olundu !",
+    "error": "Email və ya şifrə yanlışdır !",
+    "email_required": "Email daxil edilməlidir",
+    "email_invalid": "Email yanlışdır",
+    "password_required": "Şifrə daxil edilməlidir",
+    "password_invalid": "Şifrə ən azı 6 simvoldan ibarət olmalıdır"
+  }
+}
