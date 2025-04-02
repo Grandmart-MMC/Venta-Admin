@@ -13,7 +13,12 @@
     "dashboard": "Панель",
     "inquiries": "Запросы",
     "videos": "Тренинги",
-    "ad": "Вскоре"
+    "ad": "Вскоре",
+    "menu": "Меню"
+  },
+  "header": {
+    "support": "Поддержка",
+    "logout": "Выход"
   },
   "inquiries": {
     "inquiries": "Запросы",
@@ -66,7 +71,8 @@
       "date": "Дата",
       "status": "Статус",
       "priority": "Приоритет",
-      "actions": "Действия"
+      "actions": "Действия",
+      "notes": "Примечания"
     }
   },
   "login": {

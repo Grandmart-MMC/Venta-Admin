@@ -1,9 +1,6 @@
 "use client";
 import React, { useState } from "react";
-import {
-  InquiriesData,
-  InquiriesTranslation,
-} from "@/shared/types/InquiriesPageType";
+import { InquiriesData } from "@/shared/types/InquiriesPageType";
 import {
   Dialog,
   DialogContent,
@@ -24,13 +21,18 @@ import {
 import { Textarea } from "@/components/ui/textarea";
 import { useUpdateInquiry } from "@/api/services/inquiriesService";
 import { ContactFormStatus, PriorityLevel } from "@/shared/constants/status";
+import { useTranslations } from "next-intl";
 interface ProductTableProps {
   data?: InquiriesData[];
   onRefresh?: () => void;
-  t?: InquiriesTranslation;
 }
 
-const Table: React.FC<ProductTableProps> = ({ data, onRefresh, t }) => {
+const Table: React.FC<ProductTableProps> = ({ data, onRefresh }) => {
+  const t = useTranslations("inquiries.table");
+  const tb = useTranslations("inquiries.buttons");
+  const tm = useTranslations("inquiries.modal");
+  const ts = useTranslations("inquiries.status");
+  const tp = useTranslations("inquiries.priority");
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const [isViewModalOpen, setIsViewModalOpen] = useState(false);
   const [selectedInquiry, setSelectedInquiry] = useState<InquiriesData | null>(
@@ -60,25 +62,25 @@ const Table: React.FC<ProductTableProps> = ({ data, onRefresh, t }) => {
     switch (status) {
       case ContactFormStatus.New:
         return {
-          text: t?.status?.new || "Yeni",
+          text: ts("new") || "Yeni",
           bgColor: "bg-blue-100",
           textColor: "text-blue-800",
         };
       case ContactFormStatus.InProgress:
         return {
-          text: t?.status?.in_progress || "İşlənir",
+          text: ts("in_progress") || "İşlənir",
           bgColor: "bg-yellow-100",
           textColor: "text-yellow-800",
         };
       case ContactFormStatus.Resolved:
         return {
-          text: t?.status?.resolved || "Həll edilib",
+          text: ts("resolved") || "Həll edilib",
           bgColor: "bg-green-100",
           textColor: "text-green-800",
         };
       case ContactFormStatus.Unresolved:
         return {
-          text: t?.status?.unresolved || "Həll edilməyib",
+          text: ts("unresolved") || "Həll edilməyib",
           bgColor: "bg-red-100",
           textColor: "text-red-800",
         };
@@ -96,19 +98,19 @@ const Table: React.FC<ProductTableProps> = ({ data, onRefresh, t }) => {
     switch (priority) {
       case PriorityLevel.Low:
         return {
-          text: t?.priority?.low || "Aşağı",
+          text: tp("low") || "Aşağı",
           bgColor: "bg-green-100",
           textColor: "text-green-800",
         };
       case PriorityLevel.Medium:
         return {
-          text: t?.priority?.medium || "Orta",
+          text: tp("medium") || "Orta",
           bgColor: "bg-yellow-100",
           textColor: "text-yellow-800",
         };
       case PriorityLevel.High:
         return {
-          text: t?.priority?.high || "Yüksək",
+          text: tp("high") || "Yüksək",
           bgColor: "bg-red-100",
           textColor: "text-red-800",
         };
@@ -177,49 +179,40 @@ const Table: React.FC<ProductTableProps> = ({ data, onRefresh, t }) => {
     }
   };
 
-
   return (
     <>
       <div className="rounded-sm border border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark">
         {/* Desktop Header */}
         <div className="hidden sm:grid grid-cols-11 border-t border-stroke px-4 py-4.5 dark:border-strokedark md:px-6 2xl:px-7.5">
           <div className="col-span-1 flex items-center">
-            <p className="text-sm font-medium">{t?.table?.name || "Ad"}</p>
+            <p className="text-sm font-medium">{t("name") || "Ad"}</p>
           </div>
           <div className="col-span-2 flex items-center">
-            <p className="text-sm font-medium">{t?.table?.email || "Email"}</p>
+            <p className="text-sm font-medium">{t("email") || "Email"}</p>
           </div>
           <div className="col-span-1 flex items-center">
-            <p className="text-sm font-medium">
-              {t?.table?.phone || "Telefon"}
-            </p>
+            <p className="text-sm font-medium">{t("phone") || "Telefon"}</p>
           </div>
           <div className="col-span-2 flex items-center">
-            <p className="text-sm font-medium">
-              {t?.table?.message || "Mesaj"}
-            </p>
+            <p className="text-sm font-medium">{t("message") || "Mesaj"}</p>
           </div>
           <div className="col-span-1 flex items-center">
-            <p className="text-sm font-medium">{t?.table?.date || "Tarix"}</p>
+            <p className="text-sm font-medium">{t("date") || "Tarix"}</p>
           </div>
           <div className="col-span-1 flex items-center">
-            <p className="text-sm font-medium">
-              {t?.table?.status || "Status"}
-            </p>
+            <p className="text-sm font-medium">{t("status") || "Status"}</p>
           </div>
           <div className="col-span-1 flex items-center">
             <p className="text-sm font-medium">
-              {t?.table?.priority || "Prioritet"}
+              {t("priority") || "Prioritet"}
             </p>
           </div>
           <div className="col-span-1 flex items-center">
-            <p className="text-sm font-medium">
-              {t?.modal?.notes || "Notes"}
-            </p>
+            <p className="text-sm font-medium">{t("notes") || "Notes"}</p>
           </div>
-          <div className="col-span-2 flex items-center">
+          <div className="col-span-1 flex items-center">
             <p className="text-sm font-medium">
-              {t?.table?.actions || "Əməliyyatlar"}
+              {t("actions") || "Əməliyyatlar"}
             </p>
           </div>
         </div>
@@ -272,7 +265,7 @@ const Table: React.FC<ProductTableProps> = ({ data, onRefresh, t }) => {
                       onClick={() => handleViewClick(inquiry)}
                     >
                       <EyeIcon className="w-4 h-4 mr-1" />
-                      {t?.buttons?.view || "View"}
+                      {tb("view") || "View"}
                     </Button>
                     <Button
                       size="sm"
@@ -280,7 +273,7 @@ const Table: React.FC<ProductTableProps> = ({ data, onRefresh, t }) => {
                       onClick={() => handleEditClick(inquiry)}
                     >
                       <PencilIcon className="w-4 h-4 mr-1" />
-                      {t?.buttons?.edit || "Edit"}
+                      {tb("edit") || "Edit"}
                     </Button>
                   </div>
                 </div>
@@ -324,7 +317,18 @@ const Table: React.FC<ProductTableProps> = ({ data, onRefresh, t }) => {
                   {priorityInfo.text}
                 </span>
               </div>
-              <div className="hidden sm:flex col-span-2 items-center space-x-2">
+              <div
+                className="hidden sm:flex col-span-1 items-center cursor-pointer"
+                onClick={() => handleViewClick(inquiry)}
+                title={inquiry?.notes}
+              >
+                <p className="text-sm text-muted-foreground">
+                  {inquiry?.notes?.slice(0, 10)}
+                  {inquiry?.notes && inquiry.notes.length > 10 && "..."}
+                </p>
+              </div>
+
+              <div className="hidden sm:flex col-span-1 items-center space-x-2">
                 <Button
                   size="sm"
                   variant="ghost"
@@ -349,7 +353,7 @@ const Table: React.FC<ProductTableProps> = ({ data, onRefresh, t }) => {
       <Dialog open={isViewModalOpen} onOpenChange={setIsViewModalOpen}>
         <DialogContent className="sm:max-w-md">
           <DialogHeader>
-            <DialogTitle>{t?.modal?.view_title || "View Inquiry"}</DialogTitle>
+            <DialogTitle>{tm("view_title") || "View Inquiry"}</DialogTitle>
           </DialogHeader>
 
           {selectedInquiry && (
@@ -357,28 +361,28 @@ const Table: React.FC<ProductTableProps> = ({ data, onRefresh, t }) => {
               <div className="space-y-4">
                 <div>
                   <h3 className="text-sm font-medium text-muted-foreground">
-                    {t?.modal?.name || "Name"}
+                    {tm("name") || "Name"}
                   </h3>
                   <p className="mt-1">{selectedInquiry?.contactFormName}</p>
                 </div>
 
                 <div>
                   <h3 className="text-sm font-medium text-muted-foreground">
-                    {t?.modal?.email || "Email"}
+                    {tm("email") || "Email"}
                   </h3>
                   <p className="mt-1">{selectedInquiry?.contactFormEmail}</p>
                 </div>
 
                 <div>
                   <h3 className="text-sm font-medium text-muted-foreground">
-                    {t?.modal?.phone || "Phone"}
+                    {tm("phone") || "Phone"}
                   </h3>
                   <p className="mt-1">{selectedInquiry?.contactFormPhone}</p>
                 </div>
 
                 <div>
                   <h3 className="text-sm font-medium text-muted-foreground">
-                    {t?.modal?.message || "Message"}
+                    {tm("message") || "Message"}
                   </h3>
                   <p className="mt-1 whitespace-pre-wrap">
                     {selectedInquiry?.contactFormMessage}
@@ -387,7 +391,7 @@ const Table: React.FC<ProductTableProps> = ({ data, onRefresh, t }) => {
 
                 <div>
                   <h3 className="text-sm font-medium text-muted-foreground">
-                    {t?.modal?.date || "Send Time"}
+                    {tm("date") || "Send Time"}
                   </h3>
                   <p className="mt-1">
                     {formatDate(selectedInquiry?.contactFormSendTime)}
@@ -397,7 +401,7 @@ const Table: React.FC<ProductTableProps> = ({ data, onRefresh, t }) => {
                 <div className="flex flex-wrap gap-4">
                   <div>
                     <h3 className="text-sm font-medium text-muted-foreground">
-                      {t?.status?.label || "Status"}
+                      {ts("label") || "Status"}
                     </h3>
                     <span
                       className={`inline-block mt-1 text-xs px-2 py-1 ${
@@ -412,7 +416,7 @@ const Table: React.FC<ProductTableProps> = ({ data, onRefresh, t }) => {
 
                   <div>
                     <h3 className="text-sm font-medium text-muted-foreground">
-                      {t?.priority?.label || "Priority"}
+                      {tp("label") || "Priority"}
                     </h3>
                     <span
                       className={`inline-block mt-1 text-xs px-2 py-1 ${
@@ -429,7 +433,7 @@ const Table: React.FC<ProductTableProps> = ({ data, onRefresh, t }) => {
                 {selectedInquiry?.notes && (
                   <div>
                     <h3 className="text-sm font-medium text-muted-foreground">
-                      {t?.modal?.notes || "Notes"}
+                      {tm("notes") || "Notes"}
                     </h3>
                     <p className="mt-1 whitespace-pre-wrap">
                       {selectedInquiry?.notes}
@@ -442,7 +446,7 @@ const Table: React.FC<ProductTableProps> = ({ data, onRefresh, t }) => {
 
           <DialogFooter className="sm:justify-end">
             <Button variant="outline" onClick={handleCloseViewModal}>
-              {t?.buttons?.close || "Close"}
+              {tb("close") || "Close"}
             </Button>
             {selectedInquiry && (
               <Button
@@ -451,7 +455,7 @@ const Table: React.FC<ProductTableProps> = ({ data, onRefresh, t }) => {
                   handleEditClick(selectedInquiry);
                 }}
               >
-                {t?.buttons?.edit || "Edit"}
+                {tb("edit") || "Edit"}
               </Button>
             )}
           </DialogFooter>
@@ -462,7 +466,7 @@ const Table: React.FC<ProductTableProps> = ({ data, onRefresh, t }) => {
       <Dialog open={isEditModalOpen} onOpenChange={setIsEditModalOpen}>
         <DialogContent className="sm:max-w-md">
           <DialogHeader>
-            <DialogTitle>{t?.modal?.edit_title || "Edit Inquiry"}</DialogTitle>
+            <DialogTitle>{tm("edit_title") || "Edit Inquiry"}</DialogTitle>
           </DialogHeader>
 
           <div className="grid gap-4 py-4">
@@ -470,7 +474,7 @@ const Table: React.FC<ProductTableProps> = ({ data, onRefresh, t }) => {
               <>
                 <div className="grid gap-2">
                   <label htmlFor="status" className="text-sm font-medium">
-                    {t?.status?.label || "Status"}
+                    {ts("label") || "Status"}
                   </label>
                   <Select
                     value={editForm.status.toString()}
@@ -482,17 +486,15 @@ const Table: React.FC<ProductTableProps> = ({ data, onRefresh, t }) => {
                       <SelectValue placeholder="Status seçin" />
                     </SelectTrigger>
                     <SelectContent>
-                      <SelectItem value="1">
-                        {t?.status?.new || "New"}
-                      </SelectItem>
+                      <SelectItem value="1">{ts("new") || "New"}</SelectItem>
                       <SelectItem value="2">
-                        {t?.status?.in_progress || "In Progress"}
+                        {ts("in_progress") || "In Progress"}
                       </SelectItem>
                       <SelectItem value="3">
-                        {t?.status?.resolved || "Resolved"}
+                        {ts("resolved") || "Resolved"}
                       </SelectItem>
                       <SelectItem value="4">
-                        {t?.status?.unresolved || "Unresolved"}
+                        {ts("unresolved") || "Unresolved"}
                       </SelectItem>
                     </SelectContent>
                   </Select>
@@ -500,7 +502,7 @@ const Table: React.FC<ProductTableProps> = ({ data, onRefresh, t }) => {
 
                 <div className="grid gap-2">
                   <label htmlFor="priority" className="text-sm font-medium">
-                    {t?.priority?.label || "Priority"}
+                    {ts("label") || "Priority"}
                   </label>
                   <Select
                     value={editForm.priority.toString()}
@@ -512,14 +514,12 @@ const Table: React.FC<ProductTableProps> = ({ data, onRefresh, t }) => {
                       <SelectValue placeholder="Prioritet seçin" />
                     </SelectTrigger>
                     <SelectContent>
-                      <SelectItem value="1">
-                        {t?.priority?.low || "Aşağı"}
-                      </SelectItem>
+                      <SelectItem value="1">{tp("low") || "Aşağı"}</SelectItem>
                       <SelectItem value="2">
-                        {t?.priority?.medium || "Orta"}
+                        {tp("medium") || "Orta"}
                       </SelectItem>
                       <SelectItem value="3">
-                        {t?.priority?.high || "Yüksək"}
+                        {tp("high") || "Yüksək"}
                       </SelectItem>
                     </SelectContent>
                   </Select>
@@ -527,7 +527,7 @@ const Table: React.FC<ProductTableProps> = ({ data, onRefresh, t }) => {
 
                 <div className="grid gap-2">
                   <label htmlFor="notes" className="text-sm font-medium">
-                    {t?.modal?.notes || "Notes"}
+                    {tm("notes") || "Notes"}
                   </label>
                   <Textarea
                     id="notes"
@@ -536,7 +536,7 @@ const Table: React.FC<ProductTableProps> = ({ data, onRefresh, t }) => {
                       handleInputChange("notes", e.target.value)
                     }
                     rows={3}
-                    placeholder={t?.modal?.notes_placeholder || "Notes"}
+                    placeholder={tm("notes") || "Notes"}
                   />
                 </div>
               </>
@@ -545,18 +545,41 @@ const Table: React.FC<ProductTableProps> = ({ data, onRefresh, t }) => {
 
           <DialogFooter className="sm:justify-end">
             <Button variant="outline" onClick={handleCloseEditModal}>
-              {t?.buttons?.cancel || "Cancel"}
+              {tb("cancel") || "Cancel"}
             </Button>
-            <Button
-              type="submit"
-              onClick={handleSubmit}
-              disabled={isUpdating}
-            >
-              {isUpdating ? "..." : t?.buttons?.save || "Save"}
+            <Button type="submit" onClick={handleSubmit} disabled={isUpdating}>
+              {isUpdating ? "..." : tb("save") || "Save"}
             </Button>
           </DialogFooter>
         </DialogContent>
       </Dialog>
+      {isViewModalOpen && selectedInquiry && (
+        <Dialog open={isViewModalOpen} onOpenChange={handleCloseViewModal}>
+          <DialogContent>
+            <DialogHeader>
+              <DialogTitle>{tm("view_notes") || "Qeyd"}</DialogTitle>
+            </DialogHeader>
+            <div className="text-sm text-muted-foreground whitespace-pre-wrap">
+              {selectedInquiry.notes || "-"}
+            </div>
+            <DialogFooter className="flex justify-end gap-2 mt-4">
+              <Button variant="outline" onClick={handleCloseViewModal}>
+                {tb("close") || "Bağla"}
+              </Button>
+              <Button
+                variant="default"
+                onClick={() => {
+                  setIsViewModalOpen(false);
+                  setIsEditModalOpen(true);
+                }}
+              >
+                <PencilIcon className="w-4 h-4 mr-1" />
+                {tb("edit") || "Redaktə et"}
+              </Button>
+            </DialogFooter>
+          </DialogContent>
+        </Dialog>
+      )}
     </>
   );
 };

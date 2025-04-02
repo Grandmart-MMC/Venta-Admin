@@ -1,6 +1,6 @@
 "use client";
 import React, { useState } from "react";
-import ProductTable from "@/pages/products/components/ProductTable";
+import ProductTable from "@/container/products/components/ProductTable";
 import { DatePickerWithRange } from "@/components/ui/date-picker";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -18,7 +18,7 @@ import { SelectLabel } from "@radix-ui/react-select";
 import FormComponent from "./components/FormComponent";
 import DialogComponent from "./components/DialogComponent";
 
-const ProductPage = ({ t }: { t: Record<string, string> }) => {
+const ProductPage = () => {
   const [search, setSearch] = useState("");
   const [isSheetOpen, setIsSheetOpen] = useState(false);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
@@ -48,7 +48,7 @@ const ProductPage = ({ t }: { t: Record<string, string> }) => {
             <Input
               value={search}
               onChange={handleSearchChange}
-              placeholder={t?.search_placeholder}
+              placeholder={"Search..."}
               className="bg-white dark:bg-background pl-8 py-5 h-12 sm:h-auto"
             />
             <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4" />
@@ -65,7 +65,7 @@ const ProductPage = ({ t }: { t: Record<string, string> }) => {
                 className="w-full sm:w-auto h-10 sm:h-auto py-2 sm:py-4 bg-black dark:bg-white"
               >
                 <Download className="h-4 w-4 sm:mr-2" />
-                <span className="hidden sm:inline">{t?.export}</span>
+                <span className="hidden sm:inline">Export</span>
               </Button>
 
               <Button
@@ -73,7 +73,7 @@ const ProductPage = ({ t }: { t: Record<string, string> }) => {
                 className="w-full sm:w-auto h-12 sm:h-auto py-2 sm:py-4 bg-black dark:bg-white"
               >
                 <FilterIcon className="h-4 w-4" />
-                <span className="sr-only sm:hidden">{t?.filter}</span>
+                <span className="sr-only sm:hidden">Filter</span>
               </Button>
             </div>
           </div>
@@ -86,8 +86,8 @@ const ProductPage = ({ t }: { t: Record<string, string> }) => {
           className="w-full sm:w-auto h-12 sm:h-auto py-2 sm:py-4 bg-black dark:bg-white text-sm"
         >
           <Plus className="h-4 w-4 mr-0 sm:mr-2" />
-          <span className="hidden sm:inline">{t?.add_product}</span>
-          <span className="sm:hidden">{t?.add}</span>
+          <span className="hidden sm:inline">Add</span>
+          <span className="sm:hidden">Add</span>
         </Button>
       </div>
 
@@ -100,9 +100,7 @@ const ProductPage = ({ t }: { t: Record<string, string> }) => {
       >
         <div className="grid grid-cols-1 gap-4 p-4">
           <SelectGroup>
-            <SelectLabel className="mb-2 text-sm">
-              {t?.category_label}
-            </SelectLabel>
+            <SelectLabel className="mb-2 text-sm">Category</SelectLabel>
             <Select>
               <SelectTrigger className="w-full">
                 <SelectValue placeholder="Select category" />

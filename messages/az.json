@@ -8,12 +8,17 @@
     "filter_title": "Məhsulu filtrlə",
     "category_label": "Kateqoriya"
   },
+  "header": {
+    "support": "Dəstək",
+    "logout": "Çıxış"
+  },
   "sidebar": {
     "title": "Venta Admin",
     "dashboard": "Panel",
     "inquiries": "Müraciətlər",
     "videos": "Təlimlər",
-    "ad": "Tezliklə"
+    "ad": "Tezliklə",
+    "menu": "Menyu"
   },
   "inquiries": {
     "inquiries": "Müraciətlər",
@@ -66,7 +71,8 @@
       "date": "Tarix",
       "status": "Status",
       "priority": "Prioritet",
-      "actions": "Əməliyyatlar"
+      "actions": "Əməliyyatlar",
+      "notes": "Qeydlər"
     }
   },
   "login": {

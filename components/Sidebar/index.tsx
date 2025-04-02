@@ -3,24 +3,24 @@ import React, { useEffect, useState } from "react";
 import Link from "next/link";
 
 import useLocalStorage from "@/hooks/useLocalStorage";
-import { getMenuGroups } from "./constants/menuGroups";
-import { SidebarTranslationsType } from "@/shared/types/Sidebar";
+import {  useMenuGroups } from "./constants/menuGroups";
 import ClickOutside from "../ClickOutside";
 import SidebarItem from "./SidebarItem";
+import { useTranslations } from "next-intl"; // Import useTranslations
 
 interface SidebarProps {
   sidebarOpen: boolean;
   setSidebarOpen: (arg: boolean) => void;
-  t: SidebarTranslationsType;
 }
 
 export default function Sidebar({
   sidebarOpen,
-  setSidebarOpen,
-  t,
+  setSidebarOpen
 }: SidebarProps) {
   const [pageName, setPageName] = useLocalStorage("selectedMenu", "dashboard");
   const [isClient, setIsClient] = useState(false);
+  const t = useTranslations("sidebar"); // Fetch translations for 'sidebar'
+  const menuGroups = useMenuGroups();
 
   useEffect(() => {
     setIsClient(true);
@@ -30,7 +30,7 @@ export default function Sidebar({
     return null;
   }
 
-  const menuGroups = getMenuGroups(t);
+
 
   return (
     <ClickOutside onClick={() => setSidebarOpen(false)}>
@@ -43,11 +43,9 @@ export default function Sidebar({
           <Link className="flex items-center gap-4" href="/">
             {/* <Logo width={36} height={36} /> */}
             <h3 className="text-2xl font-bold text-white sm:text-title-xl2">
-            {t?.title}
+              {t("title")}
             </h3>
           </Link>
-
-      
         </div>
         <div className="custom-scrollbar flex flex-col overflow-y-auto duration-300 ease-linear">
           <nav className="mt-5 px-4 py-4 lg:mt-9 lg:px-6">

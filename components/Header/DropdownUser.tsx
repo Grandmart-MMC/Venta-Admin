@@ -5,6 +5,7 @@ import Image from "next/image";
 import ClickOutside from "../ClickOutside";
 import Profile from "@/shared/images/male.png";
 import { useRouter } from "next/navigation";
+import { useTranslations } from "next-intl";
 
 const DropdownUser = () => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
@@ -17,6 +18,7 @@ const DropdownUser = () => {
 
     setDropdownOpen(false);
   };
+  const t = useTranslations("header");
   return (
     <ClickOutside onClick={() => setDropdownOpen(false)} className="relative">
       <Link
@@ -26,7 +28,7 @@ const DropdownUser = () => {
       >
         <span className="hidden text-right lg:block">
           <span className="block text-sm font-medium text-black dark:text-white">
-            Support
+            {t("support")}
           </span>
         </span>
 
@@ -139,7 +141,7 @@ const DropdownUser = () => {
                 fill=""
               />
             </svg>
-            Log Out
+            {t("logout")}
           </button>
         </div>
       )}

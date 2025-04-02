@@ -29,13 +29,10 @@ import {
 import { exportToExcel } from "@/shared/utils/export";
 import { toast } from "react-toastify";
 import { ContactFormStatus, PriorityLevel } from "@/shared/constants/status";
-import { InquiriesTranslation } from "@/shared/types/InquiriesPageType";
+import { useTranslations } from "next-intl";
 
-interface InquiriesPageProps {
-  t: InquiriesTranslation;
-}
-
-const InquiriesPage = ({ t }: InquiriesPageProps) => {
+const InquiriesPage = () => {
+  const t=useTranslations("inquiries");
   const [search, setSearch] = useState("");
   const [debouncedSearch, setDebouncedSearch] = useState("");
   const [dateRange, setDateRange] = useState<DateRange | undefined>(undefined);
@@ -139,7 +136,7 @@ const InquiriesPage = ({ t }: InquiriesPageProps) => {
             <Input
               value={search}
               onChange={handleSearchChange}
-              placeholder={t?.search_placeholder}
+              placeholder={t("search_placeholder")}
               className="bg-white dark:bg-background pl-8 py-5 h-12 sm:h-auto"
             />
             <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4" />
@@ -160,7 +157,7 @@ const InquiriesPage = ({ t }: InquiriesPageProps) => {
                 className="w-full sm:w-auto h-10 sm:h-auto py-2 sm:py-4 bg-black dark:bg-white"
               >
                 <Download className="h-4 w-4 sm:mr-2" />
-                <span className="hidden sm:inline">{t?.export}</span>
+                <span className="hidden sm:inline">{t("export")}</span>
               </Button>
 
               <Button
@@ -168,26 +165,26 @@ const InquiriesPage = ({ t }: InquiriesPageProps) => {
                 className="w-full sm:w-auto h-12 sm:h-auto py-2 sm:py-4 bg-black dark:bg-white"
               >
                 <FilterIcon className="h-4 w-4" />
-                <span className="sr-only sm:hidden">{t?.filter_title}</span>
+                <span className="sr-only sm:hidden">{t("filter_title")}</span>
               </Button>
             </div>
           </div>
         </div>
       </div>
-      <Table data={data?.data} onRefresh={handleRefresh} t={t} />
+      <Table data={data?.data} onRefresh={handleRefresh} />
 
       {/* ReusableSheet with status and priority filters */}
       <ReusableSheet
         open={isSheetOpen}
         onClose={toggleSheet}
-        title={t?.filter_title || "Filter"}
+        title={t("filter_title") || "Filter"}
       >
         <div className="grid grid-cols-1 gap-6 p-4">
           {/* Status Filter */}
           <div>
             <SelectGroup>
               <SelectLabel className="mb-2 text-sm font-medium">
-                {t?.status?.label || "Status"}
+                {t("status.label") || "Status"}
               </SelectLabel>
               <Select
                 value={status?.toString() || "all"}
@@ -195,24 +192,24 @@ const InquiriesPage = ({ t }: InquiriesPageProps) => {
               >
                 <SelectTrigger className="w-full">
                   <SelectValue
-                    placeholder={t?.status?.label || "Select status"}
+                    placeholder={t("status.label") || "Select status"}
                   />
                 </SelectTrigger>
                 <SelectContent className="z-999">
                   <SelectItem value="all">
-                    {t?.status?.all || "All Statuses"}
+                    {t("status.all") || "All Statuses"}
                   </SelectItem>
                   <SelectItem value={ContactFormStatus.New.toString()}>
-                    {t?.status?.new || "New"}
+                    {t("status.new") || "New"}
                   </SelectItem>
                   <SelectItem value={ContactFormStatus.InProgress.toString()}>
-                    {t?.status?.in_progress || "In Progress"}
+                    {t("status.in_progress") || "In Progress"}
                   </SelectItem>
                   <SelectItem value={ContactFormStatus.Resolved.toString()}>
-                    {t?.status?.resolved || "Resolved"}
+                    {t("status.resolved") || "Resolved"}
                   </SelectItem>
                   <SelectItem value={ContactFormStatus.Unresolved.toString()}>
-                    {t?.status?.unresolved || "Unresolved"}
+                    {t("status.unresolved") || "Unresolved"}
                   </SelectItem>
                 </SelectContent>
               </Select>
@@ -223,7 +220,7 @@ const InquiriesPage = ({ t }: InquiriesPageProps) => {
           <div>
             <SelectGroup>
               <SelectLabel className="mb-2 text-sm font-medium">
-                {t?.priority?.label || "Priority"}
+                {t("priority.label") || "Priority"}
               </SelectLabel>
               <Select
                 value={priority?.toString() || "all"}
@@ -231,21 +228,21 @@ const InquiriesPage = ({ t }: InquiriesPageProps) => {
               >
                 <SelectTrigger className="w-full">
                   <SelectValue
-                    placeholder={t?.priority?.label || "Select priority"}
+                    placeholder={t("priority.label") || "Select priority"}
                   />
                 </SelectTrigger>
                 <SelectContent className="z-999">
                   <SelectItem value="all">
-                    {t?.priority?.all || "All Priorities"}
+                    {t("priority.all") || "All Priorities"}
                   </SelectItem>
                   <SelectItem value={PriorityLevel.Low.toString()}>
-                    {t?.priority?.low || "Low"}
+                    {t("priority.low" )|| "Low"}
                   </SelectItem>
                   <SelectItem value={PriorityLevel.Medium.toString()}>
-                    {t?.priority?.medium || "Medium"}
+                    {t("priority.medium") || "Medium"}
                   </SelectItem>
                   <SelectItem value={PriorityLevel.High.toString()}>
-                    {t?.priority?.high || "High"}
+                    {t("priority.high") || "High"}
                   </SelectItem>
                 </SelectContent>
               </Select>
@@ -258,7 +255,7 @@ const InquiriesPage = ({ t }: InquiriesPageProps) => {
               onClick={applyFilters}
               className="w-full bg-black dark:bg-white text-white dark:text-black"
             >
-              {t?.buttons?.apply_filters || "Apply Filters"}
+              {t("buttons.apply_filters") || "Apply Filters"}
             </Button>
             <Button
               onClick={handleResetFilters}
@@ -266,7 +263,7 @@ const InquiriesPage = ({ t }: InquiriesPageProps) => {
               className="w-full flex items-center justify-center gap-2"
             >
               <X className="h-4 w-4" />
-              {t?.buttons?.reset_filters || "Reset Filters"}
+              {t("buttons.reset_filters") || "Reset Filters"}
             </Button>
           </div>
         </div>

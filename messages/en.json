@@ -13,7 +13,12 @@
       "dashboard": "Dashboard",
       "inquiries": "Inquiries",
       "videos": "Trainings",
-      "ad": "Coming Soon"
+      "ad": "Coming Soon",
+      "menu": "Menu"
+  },
+  "header": {
+    "support": "Support",
+    "logout": "Logout"
   },
   "inquiries": {
     "inquiries": "Inquiries",
@@ -66,7 +71,8 @@
       "date": "Date",
       "status": "Status",
       "priority": "Priority",
-      "actions": "Actions"
+      "actions": "Actions",
+      "notes": "Notes"
     }
   },
     "login": {

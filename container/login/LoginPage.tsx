@@ -1,44 +1,23 @@
 "use client";
-import React, { FC } from "react";
+import React from "react";
 
 import { useForm, SubmitHandler } from "react-hook-form";
 // import { zodResolver } from '@hookform/resolvers/zod';
 // import * as z from 'zod';
 
-import LoginIcon from "@/pages/login/icons/LoginIcon";
-import MailIcon from "@/pages/login/icons/MailIcon";
-import PasswordIcon from "@/pages/login/icons/PasswordIcon";
+import LoginIcon from "@/container/login/icons/LoginIcon";
+import MailIcon from "@/container/login/icons/MailIcon";
+import PasswordIcon from "@/container/login/icons/PasswordIcon";
 import Link from "next/link";
 import LanguageSwitcher from "@/components/Switcher/LanguageSwitcher";
 // import { useLogin } from '@/api/services/api';
 import { LoginRequest } from "@/api/types/loginType";
 import { useAuth } from "@/api/services/login";
+import { useTranslations } from "next-intl";
 
-interface LoginTranslations {
-  title: string;
-  heading: string;
-  email: {
-    label: string;
-    placeholder: string;
-  };
-  password: {
-    label: string;
-    placeholder: string;
-  };
-  submit: string;
-  success: string;
-  error: string;
-  email_required: string;
-  email_invalid: string;
-  password_required: string;
-  password_invalid: string;
-}
 
-interface LoginPageProps {
-  t: LoginTranslations;
-}
-
-const LoginPage: FC<LoginPageProps> = ({ t }) => {
+const LoginPage = () => {
+  const t = useTranslations("login");
   const { mutate, isPending } = useAuth();
 
   // const loginSchema = z.object({
@@ -87,7 +66,7 @@ const LoginPage: FC<LoginPageProps> = ({ t }) => {
               href="/"
             >
               <h3 className="text-2xl font-bold text-black dark:text-white sm:text-title-xl2">
-                {t?.title}
+                {t("title")}
               </h3>
             </Link>
             <span className="mt-15 inline-block">
@@ -100,19 +79,19 @@ const LoginPage: FC<LoginPageProps> = ({ t }) => {
         <div className="w-full border-stroke dark:border-strokedark xl:w-1/2 xl:border-l-2">
           <div className="w-full p-4 sm:p-12.5 xl:p-17.5">
             <h2 className="mb-9 text-2xl font-bold text-black dark:text-white sm:text-title-xl2">
-              {t?.heading}
+              {t("heading")}
             </h2>
 
             <form onSubmit={handleSubmit(onSubmit)}>
               {/* Email Input */}
               <div className="mb-4">
                 <label className="mb-2.5 block font-medium text-black dark:text-white">
-                  {t?.email?.label}
+                  {t("email.label")}
                 </label>
                 <div className="relative">
                   <input
                     {...register("username")}
-                    placeholder={t?.email?.placeholder}
+                    placeholder={t("email.placeholder")}
                     className={`w-full rounded-lg border ${
                       errors.username ? "border-red-500" : "border-stroke"
                     } bg-transparent py-4 pl-6 pr-10 text-black outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary`}
@@ -131,13 +110,13 @@ const LoginPage: FC<LoginPageProps> = ({ t }) => {
               {/* Password Input */}
               <div className="mb-6">
                 <label className="mb-2.5 block font-medium text-black dark:text-white">
-                  {t?.password?.label}
+                  {t("password.label")}
                 </label>
                 <div className="relative">
                   <input
                     type="password"
                     {...register("password")}
-                    placeholder={t?.password.placeholder}
+                    placeholder={t("password.placeholder")}
                     className={`w-full rounded-lg border ${
                       errors?.password ? "border-red-500" : "border-stroke"
                     } bg-transparent py-4 pl-6 pr-10 text-black outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary`}
@@ -162,7 +141,7 @@ const LoginPage: FC<LoginPageProps> = ({ t }) => {
                     isPending ? "opacity-50 cursor-not-allowed" : ""
                   }`}
                 >
-                  {isPending ? "Loading..." : t?.submit}
+                  {isPending ? "Loading..." : t("submit")}
                 </button>
               </div>
             </form>
