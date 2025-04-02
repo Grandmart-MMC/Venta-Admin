@@ -1,6 +1,5 @@
 "use client";
 import React, { FC } from "react";
-import { useRouter } from "next/navigation";
 
 import { useForm, SubmitHandler } from "react-hook-form";
 // import { zodResolver } from '@hookform/resolvers/zod';
@@ -41,7 +40,6 @@ interface LoginPageProps {
 
 const LoginPage: FC<LoginPageProps> = ({ t }) => {
   const { mutate, isPending } = useAuth();
-  const router = useRouter();
 
   // const loginSchema = z.object({
   //   username: z.string()
@@ -65,7 +63,7 @@ const LoginPage: FC<LoginPageProps> = ({ t }) => {
   const onSubmit: SubmitHandler<LoginRequest> = (data) => {
     mutate(data as LoginRequest, {
       onSuccess: () => {
-        router.push("/statistics");
+        window.location.href = "/inquiries";
       },
     });
   };
