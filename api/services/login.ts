@@ -19,8 +19,7 @@ export const loginApi = async (
     console.error("Login error:", error);
 
     const errorMessage =
-      (error as LoginError).response?.data
-       || "Failed to login";
+      (error as LoginError).response?.data || "Failed to login";
     const statusCode = (error as LoginError).response?.status;
 
     throw {
