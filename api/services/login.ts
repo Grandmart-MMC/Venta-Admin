@@ -13,7 +13,7 @@ export const loginApi = async (
     );
     // Token saxlamaq
     // localStorage.setItem("authToken", data.token);
-    document.cookie = `auth-token=${data.token}; path=/; max-age=${60 * 60 * 24 * 7}; Secure; SameSite=Strict`;
+    document.cookie = `auth-token=${data.token}; path=/; max-age=${60 * 60 * 24 * 7}; SameSite=Strict`;
     return data;
   } catch (error: unknown) {
     console.error("Login error:", error);

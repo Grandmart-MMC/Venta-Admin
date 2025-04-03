@@ -14,22 +14,12 @@ import LanguageSwitcher from "@/components/Switcher/LanguageSwitcher";
 import { LoginRequest } from "@/api/types/loginType";
 import { useAuth } from "@/api/services/login";
 import { useTranslations } from "next-intl";
-
+import { useRouter } from "next/navigation";
 
 const LoginPage = () => {
   const t = useTranslations("login");
   const { mutate, isPending } = useAuth();
-
-  // const loginSchema = z.object({
-  //   username: z.string()
-  //     .min(1, t.email_required)
-  //     .email(t.email_invalid),
-  //   password: z.string()
-  //     .min(1, t.password_required)
-  //     .min(6, t.password_invalid || 'Password must be at least 6 characters')
-  // });
-
-  // type LoginFormData = z.infer<typeof loginSchema>;
+  const router = useRouter();
 
   const {
     register,
@@ -42,7 +32,7 @@ const LoginPage = () => {
   const onSubmit: SubmitHandler<LoginRequest> = (data) => {
     mutate(data as LoginRequest, {
       onSuccess: () => {
-        window.location.href = "/inquiries";
+        router.push("/inquiries");
       },
     });
   };
