@@ -32,14 +32,14 @@ import { ContactFormStatus, PriorityLevel } from "@/shared/constants/status";
 import { useTranslations } from "next-intl";
 
 const InquiriesPage = () => {
-  const t=useTranslations("inquiries");
+  const t = useTranslations("inquiries");
   const [search, setSearch] = useState("");
   const [debouncedSearch, setDebouncedSearch] = useState("");
   const [dateRange, setDateRange] = useState<DateRange | undefined>(undefined);
   const [status, setStatus] = useState<number | undefined>(undefined);
   const [priority, setPriority] = useState<number | undefined>(undefined);
   const [currentPage, setCurrentPage] = useState(1);
-  const [itemsPerPage] = useState(3);
+  const [itemsPerPage] = useState(10);
   const [isSheetOpen, setIsSheetOpen] = useState(false);
   const toggleSheet = () => setIsSheetOpen((prev) => !prev);
 
@@ -171,7 +171,39 @@ const InquiriesPage = () => {
           </div>
         </div>
       </div>
-      <Table data={data?.data} onRefresh={handleRefresh} />
+      {/* Table or Not Found + Reset Filters */}
+      {(!data?.data || data.data.length === 0) ? (
+        <div className="flex flex-col items-center justify-center py-16">
+          <div className="bg-white dark:bg-boxdark shadow-lg rounded-lg p-8 flex flex-col items-center">
+            <svg xmlns="http://www.w3.org/2000/svg" className="h-12 w-12 text-gray-400 mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-4-4m0 0A7 7 0 104 4a7 7 0 0013 13z" /></svg>
+            <h2 className="text-xl font-semibold text-gray-700 mb-2">{t("not_found.title") || "Nəticə tapılmadı"}</h2>
+            <p className="text-gray-500 text-center max-w-xs mb-4">{t("not_found.desc") || "Axtarış və ya filter nəticəsində heç bir məlumat tapılmadı."}</p>
+            {(search || dateRange || status !== undefined || priority !== undefined) && (
+              <button
+                onClick={handleResetFilters}
+                className="mt-2 px-4 py-2 bg-black text-white rounded hover:bg-gray-800 transition"
+              >
+                {t("buttons.reset_filters") || "Filterləri sıfırla"}
+              </button>
+            )}
+          </div>
+        </div>
+      ) : (
+        <>
+          {(search || dateRange || status !== undefined || priority !== undefined) && (
+            <div className="flex justify-end mb-2">
+              <button
+                onClick={handleResetFilters}
+                className=" flex items-center gap-2 px-4 py-2 bg-yellow-500 text-white rounded hover:bg-yellow-800 transition"
+              >
+                {t("buttons.reset_filters") || "Filterləri sıfırla"}
+                <X className="h-4 w-4" />
+              </button>
+            </div>
+          )}
+          <Table data={data?.data} onRefresh={handleRefresh} />
+        </>
+      )}
 
       {/* ReusableSheet with status and priority filters */}
       <ReusableSheet
@@ -236,7 +268,7 @@ const InquiriesPage = () => {
                     {t("priority.all") || "All Priorities"}
                   </SelectItem>
                   <SelectItem value={PriorityLevel.Low.toString()}>
-                    {t("priority.low" )|| "Low"}
+                    {t("priority.low") || "Low"}
                   </SelectItem>
                   <SelectItem value={PriorityLevel.Medium.toString()}>
                     {t("priority.medium") || "Medium"}

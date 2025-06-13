@@ -179,6 +179,12 @@ const Table: React.FC<ProductTableProps> = ({ data, onRefresh }) => {
     }
   };
 
+  // Truncate helper
+  const truncateText = (text: string, maxLength: number) => {
+    if (!text) return "";
+    return text.length > maxLength ? text.slice(0, maxLength) + "..." : text;
+  };
+
   return (
     <>
       <div className="rounded-sm border border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark">
@@ -217,6 +223,17 @@ const Table: React.FC<ProductTableProps> = ({ data, onRefresh }) => {
           </div>
         </div>
 
+        {/* Not Found State */}
+        {(!data || data.length === 0) && (
+          <div className="flex flex-col items-center justify-center py-16">
+            <div className="bg-white dark:bg-boxdark shadow-lg rounded-lg p-8 flex flex-col items-center">
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-12 w-12 text-gray-400 mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-4-4m0 0A7 7 0 104 4a7 7 0 0013 13z" /></svg>
+              <h2 className="text-xl font-semibold text-gray-700 mb-2">{t("not_found.title") || "Nəticə tapılmadı"}</h2>
+              <p className="text-gray-500 text-center max-w-xs">{t("not_found.desc") || "Axtarış və ya filter nəticəsində heç bir məlumat tapılmadı."}</p>
+            </div>
+          </div>
+        )}
+
         {data?.map((inquiry, idx) => {
           const statusInfo = getStatusInfo(inquiry?.status);
           const priorityInfo = getPriorityInfo(inquiry?.priority);
@@ -236,10 +253,10 @@ const Table: React.FC<ProductTableProps> = ({ data, onRefresh }) => {
                     {inquiry?.contactFormEmail}
                   </p>
                   <p className="text-xs text-muted-foreground">
-                    {inquiry?.contactFormPhone}
+                    {truncateText(inquiry?.contactFormPhone, 15)}
                   </p>
                   <p className="text-xs text-muted-foreground line-clamp-2 mt-1">
-                    {inquiry?.contactFormMessage}
+                    {truncateText(inquiry?.contactFormMessage, 30)}
                   </p>
                 </div>
                 <div className="flex flex-col items-end gap-2">
@@ -291,11 +308,11 @@ const Table: React.FC<ProductTableProps> = ({ data, onRefresh }) => {
                 </p>
               </div>
               <div className="hidden sm:flex col-span-1 items-center">
-                <p className="text-sm">{inquiry?.contactFormPhone}</p>
+                <p className="text-sm">{truncateText(inquiry?.contactFormPhone, 14)}</p>
               </div>
               <div className="hidden sm:flex col-span-2 items-center">
-                <p className="text-sm text-muted-foreground line-clamp-2">
-                  {inquiry?.contactFormMessage}
+                <p className="text-sm text-muted-foreground line-clamp-1">
+                  {truncateText(inquiry?.contactFormMessage, 20)}
                 </p>
               </div>
               <div className="hidden sm:flex col-span-1 items-center">

@@ -73,6 +73,10 @@
       "priority": "Prioritet",
       "actions": "Əməliyyatlar",
       "notes": "Qeydlər"
+    },
+    "not_found": {
+      "title": "Nəticə tapılmadı",
+      "desc": "Axtarış və ya filter nəticəsində heç bir məlumat tapılmadı."
     }
   },
   "login": {

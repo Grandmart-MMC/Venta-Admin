@@ -73,6 +73,10 @@
       "priority": "Priority",
       "actions": "Actions",
       "notes": "Notes"
+    },
+    "not_found": {
+      "title": "Not found",
+      "desc": "No data found for your search or filters."
     }
   },
     "login": {
