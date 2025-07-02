@@ -35,13 +35,29 @@ const InquiriesPage = () => {
   const t = useTranslations("inquiries");
   const [search, setSearch] = useState("");
   const [debouncedSearch, setDebouncedSearch] = useState("");
+  
+  // Applied filters (aktual API çağrısı için)
   const [dateRange, setDateRange] = useState<DateRange | undefined>(undefined);
   const [status, setStatus] = useState<number | undefined>(undefined);
   const [priority, setPriority] = useState<number | undefined>(undefined);
+  
+  // Temporary filters (Sheet içinde seçim için)
+  const [tempDateRange, setTempDateRange] = useState<DateRange | undefined>(undefined);
+  const [tempStatus, setTempStatus] = useState<number | undefined>(undefined);
+  const [tempPriority, setTempPriority] = useState<number | undefined>(undefined);
+  
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage] = useState(10);
   const [isSheetOpen, setIsSheetOpen] = useState(false);
-  const toggleSheet = () => setIsSheetOpen((prev) => !prev);
+  const toggleSheet = () => {
+    if (!isSheetOpen) {
+      // Sheet açılırken temporary state'leri current state'lerle sync et
+      setTempStatus(status);
+      setTempPriority(priority);
+      setTempDateRange(dateRange);
+    }
+    setIsSheetOpen((prev) => !prev);
+  };
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -77,30 +93,41 @@ const InquiriesPage = () => {
   };
 
   const handleDateRangeChange = (range: DateRange | undefined) => {
+    // Date range hemen apply olsun çünkü ana sayfada görünüyor
     setDateRange(range);
+    setTempDateRange(range);
     setCurrentPage(1);
   };
 
   const handleStatusChange = (value: string) => {
-    setStatus(value === "all" ? undefined : parseInt(value));
-    setCurrentPage(1);
+    // Sadece temporary state'i güncelle
+    setTempStatus(value === "all" ? undefined : parseInt(value));
   };
 
   const handlePriorityChange = (value: string) => {
-    setPriority(value === "all" ? undefined : parseInt(value));
-    setCurrentPage(1);
+    // Sadece temporary state'i güncelle
+    setTempPriority(value === "all" ? undefined : parseInt(value));
   };
 
   const handleResetFilters = () => {
+    // Hem asıl hem temporary state'leri sıfırla
     setStatus(undefined);
     setPriority(undefined);
     setDateRange(undefined);
+    setTempStatus(undefined);
+    setTempPriority(undefined);
+    setTempDateRange(undefined);
     setSearch("");
     setCurrentPage(1);
     setIsSheetOpen(false);
   };
 
   const applyFilters = () => {
+    // Temporary state'leri asıl state'lere apply et
+    setStatus(tempStatus);
+    setPriority(tempPriority);
+    setDateRange(tempDateRange);
+    setCurrentPage(1);
     setIsSheetOpen(false);
   };
 
@@ -219,7 +246,7 @@ const InquiriesPage = () => {
                 {t("status.label") || "Status"}
               </SelectLabel>
               <Select
-                value={status?.toString() || "all"}
+                value={tempStatus?.toString() || "all"}
                 onValueChange={handleStatusChange}
               >
                 <SelectTrigger className="w-full">
@@ -255,7 +282,7 @@ const InquiriesPage = () => {
                 {t("priority.label") || "Priority"}
               </SelectLabel>
               <Select
-                value={priority?.toString() || "all"}
+                value={tempPriority?.toString() || "all"}
                 onValueChange={handlePriorityChange}
               >
                 <SelectTrigger className="w-full">
