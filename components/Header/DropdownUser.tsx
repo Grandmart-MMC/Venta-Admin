@@ -4,18 +4,13 @@ import Link from "next/link";
 import Image from "next/image";
 import ClickOutside from "../ClickOutside";
 import Profile from "@/shared/images/male.png";
-import { useRouter } from "next/navigation";
 import { useTranslations } from "next-intl";
+import { logout } from "@/shared/utils/auth";
 
 const DropdownUser = () => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
-  const router = useRouter();
   const handleLogout = () => {
-    document.cookie =
-      "auth-token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
-
-    router.push("/");
-
+    logout();
     setDropdownOpen(false);
   };
   const t = useTranslations("header");

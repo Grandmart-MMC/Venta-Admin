@@ -97,5 +97,13 @@
     "email_invalid": "Email is invalid",
     "password_required": "Password is required",
     "password_invalid": "Password must be at least 6 characters"
+  },
+  "auth": {
+    "token_expired": {
+      "title": "Session Expired",
+      "message": "Your session has expired for security reasons. Please sign in again to continue.",
+      "security_note": "This is a security measure to protect your data.",
+      "login_button": "Sign In Again"
+    }
   }
-  }
+}

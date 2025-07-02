@@ -4,10 +4,121 @@ import CardDataStats from "./components/CardDataStats";
 import ChartOne from "./components/ChartOne";
 import ChartTwo from "./components/ChartTwo";
 import ChartThree from "./components/ChartThree";
+import apiClient from "@/api/ApiClient";
+import { useAuth } from "@/hooks/useAuth";
 
 const DashBoardPage = () => {
+  const { checkAuthStatus } = useAuth();
+
+  // Test fonksiyonları
+  const testLogout = () => {
+    console.log('🧪 Manual logout test');
+    document.cookie = "auth-token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/";
+    // Hemen auth kontrolü yap
+    setTimeout(() => checkAuthStatus(), 100);
+  };
+
+  const testInvalidToken = () => {
+    console.log('🧪 Invalid token test');
+    document.cookie = "auth-token=invalid-token-123; path=/; max-age=3600";
+    // Hemen auth kontrolü yap
+    setTimeout(() => checkAuthStatus(), 100);
+  };
+
+  const test401Error = async () => {
+    console.log('🧪 Testing 401 API response');
+    try {
+      await apiClient.get('/test-auth');
+    } catch (error) {
+      console.log('Test API call completed - check logs for auth handling');
+    }
+  };
+
+  const testTokenExpiredModal = () => {
+    console.log('🧪 Testing token expired modal - we are already authenticated');
+    // Dashboard'da zaten authenticate olduğumuz için direkt token silmek yeterli
+    document.cookie = "auth-token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/";
+    // İki kere checkAuthStatus çağır ki wasAuthenticated doğru olsun
+    setTimeout(() => {
+      checkAuthStatus();
+      setTimeout(() => checkAuthStatus(), 100);
+    }, 100);
+  };
+
+  const showTokenInfo = () => {
+    const token = document.cookie.split('; ').find(cookie => cookie.startsWith('auth-token='));
+    console.log('🔍 Current token:', token);
+    
+    if (token) {
+      const tokenValue = token.split('=')[1];
+      try {
+        const base64Url = tokenValue.split('.')[1];
+        const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+        const jsonPayload = decodeURIComponent(
+          window.atob(base64)
+            .split('')
+            .map((c) => '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2))
+            .join('')
+        );
+        const decoded = JSON.parse(jsonPayload);
+        console.log('🔓 Decoded token:', decoded);
+        console.log('⏰ Expires at:', new Date(decoded.exp * 1000).toLocaleString());
+      } catch (error) {
+        console.log('❌ Could not decode token');
+      }
+    }
+  };
+
   return (
     <React.Fragment>
+      {/* Test Butonları - Sadece development modunda göster */}
+      {process.env.NODE_ENV === 'development' && (
+        <div className="mb-6 p-4 bg-yellow-50 dark:bg-yellow-900/20 border border-yellow-200 dark:border-yellow-800 rounded-lg">
+          <h3 className="text-lg font-semibold mb-3 text-yellow-800 dark:text-yellow-200">
+            🧪 Auth Test Controls
+          </h3>
+          <div className="flex flex-wrap gap-2">
+            <button
+              onClick={showTokenInfo}
+              className="px-3 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 text-sm"
+            >
+              Show Token Info
+            </button>
+            <button
+              onClick={testLogout}
+              className="px-3 py-2 bg-red-500 text-white rounded hover:bg-red-600 text-sm"
+              title="Token silinəcək və 100ms sonra yönləndirilməli"
+            >
+              Test Logout (Hızlı)
+            </button>
+            <button
+              onClick={testInvalidToken}
+              className="px-3 py-2 bg-orange-500 text-white rounded hover:bg-orange-600 text-sm"
+              title="Geçersiz token setlənəcək və 100ms sonra yönləndirilməli"
+            >
+              Set Invalid Token (Hızlı)
+            </button>
+            <button
+              onClick={test401Error}
+              className="px-3 py-2 bg-purple-500 text-white rounded hover:bg-purple-600 text-sm"
+            >
+              Test 401 API Call
+            </button>
+            <button
+              onClick={testTokenExpiredModal}
+              className="px-3 py-2 bg-pink-500 text-white rounded hover:bg-pink-600 text-sm"
+              title="Token expired modal göstəriləcək"
+            >
+              Test Modal (Token Expired)
+            </button>
+          </div>
+          <p className="text-sm text-yellow-700 dark:text-yellow-300 mt-2">
+            ✅ Token silindiğində artık <strong>modal göstəriləcək</strong> (anında logout deyil)<br/>
+            🔍 Browser console (F12) açın və detallı log'ları izləyin<br/>
+            💡 "Test Modal" butonu ilə token expired modal'ını test edin
+          </p>
+        </div>
+      )}
       <div className="grid grid-cols-1 gap-4 md:grid-cols-2 md:gap-6 xl:grid-cols-4 2xl:gap-7.5">
         <CardDataStats title="Total views" total="$3.456K" rate="0.43%" levelUp>
           <svg

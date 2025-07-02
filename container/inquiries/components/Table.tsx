@@ -187,36 +187,36 @@ const Table: React.FC<ProductTableProps> = ({ data, onRefresh }) => {
 
   return (
     <>
-      <div className="rounded-sm border border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark">
+      <div className="rounded-sm border border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark overflow-hidden">
         {/* Desktop Header */}
-        <div className="hidden sm:grid grid-cols-11 border-t border-stroke px-4 py-4.5 dark:border-strokedark md:px-6 2xl:px-7.5">
-          <div className="col-span-1 flex items-center">
-            <p className="text-sm font-medium">{t("name") || "Ad"}</p>
+        <div className="hidden sm:grid grid-cols-11 border-t border-stroke px-4 py-4.5 dark:border-strokedark md:px-6 2xl:px-7.5 min-w-0">
+          <div className="col-span-1 flex items-center min-w-0">
+            <p className="text-sm font-medium truncate">{t("name") || "Ad"}</p>
           </div>
-          <div className="col-span-2 flex items-center">
-            <p className="text-sm font-medium">{t("email") || "Email"}</p>
+          <div className="col-span-2 flex items-center min-w-0">
+            <p className="text-sm font-medium truncate">{t("email") || "Email"}</p>
           </div>
-          <div className="col-span-1 flex items-center">
-            <p className="text-sm font-medium">{t("phone") || "Telefon"}</p>
+          <div className="col-span-1 flex items-center min-w-0">
+            <p className="text-sm font-medium truncate">{t("phone") || "Telefon"}</p>
           </div>
-          <div className="col-span-2 flex items-center">
-            <p className="text-sm font-medium">{t("message") || "Mesaj"}</p>
+          <div className="col-span-2 flex items-center min-w-0">
+            <p className="text-sm font-medium truncate">{t("message") || "Mesaj"}</p>
           </div>
-          <div className="col-span-1 flex items-center">
-            <p className="text-sm font-medium">{t("date") || "Tarix"}</p>
+          <div className="col-span-1 flex items-center min-w-0">
+            <p className="text-sm font-medium truncate">{t("date") || "Tarix"}</p>
           </div>
-          <div className="col-span-1 flex items-center">
+          <div className="col-span-1 flex items-center justify-center">
             <p className="text-sm font-medium">{t("status") || "Status"}</p>
           </div>
-          <div className="col-span-1 flex items-center">
+          <div className="col-span-1 flex items-center justify-center">
             <p className="text-sm font-medium">
               {t("priority") || "Prioritet"}
             </p>
           </div>
-          <div className="col-span-1 flex items-center">
-            <p className="text-sm font-medium">{t("notes") || "Notes"}</p>
+          <div className="col-span-1 flex items-center min-w-0">
+            <p className="text-sm font-medium truncate">{t("notes") || "Notes"}</p>
           </div>
-          <div className="col-span-1 flex items-center">
+          <div className="col-span-1 flex items-center justify-center">
             <p className="text-sm font-medium">
               {t("actions") || "Əməliyyatlar"}
             </p>
@@ -241,19 +241,19 @@ const Table: React.FC<ProductTableProps> = ({ data, onRefresh }) => {
           return (
             <div
               key={idx}
-              className="grid grid-cols-1 sm:grid-cols-11 border-t border-stroke px-4 py-4.5 dark:border-strokedark sm:px-6 2xl:px-7.5 hover:bg-gray-50 dark:hover:bg-[#272B30]"
+              className="grid grid-cols-1 sm:grid-cols-11 border-t border-stroke px-4 py-4.5 dark:border-strokedark sm:px-6 2xl:px-7.5 hover:bg-gray-50 dark:hover:bg-[#272B30] min-w-0"
             >
               {/* Mobil Görünüş */}
               <div className="sm:hidden flex justify-between items-start mb-2">
-                <div className="flex flex-col gap-1">
-                  <p className="text-sm font-medium">
+                <div className="flex flex-col gap-1 flex-1 min-w-0 pr-2">
+                  <p className="text-sm font-medium truncate">
                     {inquiry?.contactFormName}
                   </p>
-                  <p className="text-xs text-muted-foreground">
+                  <p className="text-xs text-muted-foreground truncate">
                     {inquiry?.contactFormEmail}
                   </p>
-                  <p className="text-xs text-muted-foreground">
-                    {truncateText(inquiry?.contactFormPhone, 15)}
+                  <p className="text-xs text-muted-foreground break-all">
+                    {truncateText(inquiry?.contactFormPhone, 12)}
                   </p>
                   <p className="text-xs text-muted-foreground line-clamp-2 mt-1">
                     {truncateText(inquiry?.contactFormMessage, 30)}
@@ -297,59 +297,60 @@ const Table: React.FC<ProductTableProps> = ({ data, onRefresh }) => {
               </div>
 
               {/* Desktop Görünüş */}
-              <div className="hidden sm:flex col-span-1 items-center">
-                <p className="text-sm line-clamp-1">
+              <div className="hidden sm:flex col-span-1 items-center min-w-0">
+                <p className="text-sm truncate w-full">
                   {inquiry?.contactFormName}
                 </p>
               </div>
-              <div className="hidden sm:flex col-span-2 items-center">
-                <p className="text-sm text-muted-foreground line-clamp-1">
+              <div className="hidden sm:flex col-span-2 items-center min-w-0">
+                <p className="text-sm text-muted-foreground truncate w-full">
                   {inquiry?.contactFormEmail}
                 </p>
               </div>
-              <div className="hidden sm:flex col-span-1 items-center">
-                <p className="text-sm">{truncateText(inquiry?.contactFormPhone, 14)}</p>
+              <div className="hidden sm:flex col-span-1 items-center min-w-0">
+                <p className="text-sm truncate w-full">{truncateText(inquiry?.contactFormPhone, 12)}</p>
               </div>
-              <div className="hidden sm:flex col-span-2 items-center">
-                <p className="text-sm text-muted-foreground line-clamp-1">
-                  {truncateText(inquiry?.contactFormMessage, 20)}
+              <div className="hidden sm:flex col-span-2 items-center min-w-0">
+                <p className="text-sm text-muted-foreground truncate w-full">
+                  {truncateText(inquiry?.contactFormMessage, 15)}
                 </p>
               </div>
-              <div className="hidden sm:flex col-span-1 items-center">
-                <p className="text-sm">
+              <div className="hidden sm:flex col-span-1 items-center min-w-0">
+                <p className="text-sm truncate w-full">
                   {formatDate(inquiry?.contactFormSendTime)}
                 </p>
               </div>
-              <div className="hidden sm:flex col-span-1 items-center">
+              <div className="hidden sm:flex col-span-1 items-center justify-center">
                 <span
-                  className={`text-xs px-2 py-1 ${statusInfo.bgColor} ${statusInfo.textColor} rounded-full`}
+                  className={`text-xs px-2 py-1 ${statusInfo.bgColor} ${statusInfo.textColor} rounded-full whitespace-nowrap`}
                 >
                   {statusInfo.text}
                 </span>
               </div>
-              <div className="hidden sm:flex col-span-1 items-center">
+              <div className="hidden sm:flex col-span-1 items-center justify-center">
                 <span
-                  className={`text-xs px-2 py-1 ${priorityInfo.bgColor} ${priorityInfo.textColor} rounded-full`}
+                  className={`text-xs px-2 py-1 ${priorityInfo.bgColor} ${priorityInfo.textColor} rounded-full whitespace-nowrap`}
                 >
                   {priorityInfo.text}
                 </span>
               </div>
               <div
-                className="hidden sm:flex col-span-1 items-center cursor-pointer"
+                className="hidden sm:flex col-span-1 items-center cursor-pointer min-w-0"
                 onClick={() => handleViewClick(inquiry)}
                 title={inquiry?.notes}
               >
-                <p className="text-sm text-muted-foreground">
-                  {inquiry?.notes?.slice(0, 10)}
-                  {inquiry?.notes && inquiry.notes.length > 10 && "..."}
+                <p className="text-sm text-muted-foreground truncate w-full">
+                  {inquiry?.notes?.slice(0, 8)}
+                  {inquiry?.notes && inquiry.notes.length > 8 && "..."}
                 </p>
               </div>
 
-              <div className="hidden sm:flex col-span-1 items-center space-x-2">
+              <div className="hidden sm:flex col-span-1 items-center justify-center space-x-1">
                 <Button
                   size="sm"
                   variant="ghost"
                   onClick={() => handleViewClick(inquiry)}
+                  className="p-1 h-8 w-8"
                 >
                   <EyeIcon className="w-4 h-4" />
                 </Button>
@@ -357,6 +358,7 @@ const Table: React.FC<ProductTableProps> = ({ data, onRefresh }) => {
                   size="sm"
                   variant="ghost"
                   onClick={() => handleEditClick(inquiry)}
+                  className="p-1 h-8 w-8"
                 >
                   <PencilIcon className="w-4 h-4" />
                 </Button>

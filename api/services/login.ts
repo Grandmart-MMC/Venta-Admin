@@ -28,7 +28,7 @@ export const loginApi = async (
     };
   }
 };
-export const useAuth = () => {
+export const useLogin = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<{
     message: string;

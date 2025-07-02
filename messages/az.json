@@ -97,5 +97,13 @@
     "email_invalid": "Email yanlışdır",
     "password_required": "Şifrə daxil edilməlidir",
     "password_invalid": "Şifrə ən azı 6 simvoldan ibarət olmalıdır"
+  },
+  "auth": {
+    "token_expired": {
+      "title": "Sessiya müddəti bitmişdir",
+      "message": "Təhlükəsizlik səbəbi ilə sessiya müddətiniz başa çatmışdır. Xahiş edirik yenidən daxil olun.",
+      "security_note": "Bu təhlükəsizlik tədbidir və məlumatlarınızı qorumaq üçündür.",
+      "login_button": "Yenidən Daxil Ol"
+    }
   }
 }

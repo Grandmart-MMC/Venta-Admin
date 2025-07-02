@@ -12,13 +12,13 @@ import Link from "next/link";
 import LanguageSwitcher from "@/components/Switcher/LanguageSwitcher";
 // import { useLogin } from '@/api/services/api';
 import { LoginRequest } from "@/api/types/loginType";
-import { useAuth } from "@/api/services/login";
+import { useLogin } from "@/api/services/login";
 import { useTranslations } from "next-intl";
 import { useRouter } from "next/navigation";
 
 const LoginPage = () => {
   const t = useTranslations("login");
-  const { mutate, isPending } = useAuth();
+  const { mutate, isPending } = useLogin();
   const router = useRouter();
 
   const {

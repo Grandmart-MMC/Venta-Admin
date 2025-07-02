@@ -1,19 +1,6 @@
 import axios from "axios";
 import { API_BASE_URL, API_TIMEOUT } from "./config";
-
-const getTokenFromCookie = (): string | null => {
-  const cookieString = document.cookie;
-  const cookies = cookieString.split("; ");
-  const authTokenCookie = cookies.find((cookie) =>
-    cookie.startsWith("auth-token=")
-  );
-
-  if (authTokenCookie) {
-    return authTokenCookie.split("=")[1];
-  }
-
-  return null;
-};
+import { getTokenFromCookie, logout } from "@/shared/utils/auth";
 
 const apiClient = axios.create({
   baseURL: API_BASE_URL,
@@ -35,8 +22,11 @@ apiClient.interceptors.response.use(
   (response) => response,
   (error) => {
     if (error.response && error.response.status === 401) {
-      document.cookie =
-        "auth-token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+      console.log('🚫 401 Unauthorized error received - triggering logout');
+      console.log('Error details:', error.response);
+      
+      // Auth utility'den logout fonksiyonunu kullan
+      logout();
     }
     return Promise.reject(error);
   }
