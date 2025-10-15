@@ -35,7 +35,7 @@ const InquiriesPage = () => {
   const t = useTranslations("inquiries");
   const [search, setSearch] = useState("");
   const [debouncedSearch, setDebouncedSearch] = useState("");
-  
+  console.log("debouncedSearch: ", debouncedSearch);
   // Applied filters (aktual API çağrısı için)
   const [dateRange, setDateRange] = useState<DateRange | undefined>(undefined);
   const [status, setStatus] = useState<number | undefined>(undefined);
